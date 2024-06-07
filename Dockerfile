@@ -6,13 +6,14 @@ WORKDIR /app
 
 # Instalar dependencias necesarias para la compilación
 RUN apt-get update && apt-get install -y \
+    git \
     libmariadb-dev \
     gcc \
     default-libmysqlclient-dev && \
     rm -rf /var/lib/apt/lists/*  # Limpieza del cache de apt para reducir tamaño de la imagen
 
-# Copiar todos los archivos necesarios al contenedor
-COPY . /app
+# Clonar el repositorio desde GitHub
+RUN git clone https://github.com/fahelodev/flask_apps.git .
 
 # Instalar dependencias de Python
 # Asegúrate de tener un archivo requirements.txt en tu directorio con todas las dependencias necesarias
